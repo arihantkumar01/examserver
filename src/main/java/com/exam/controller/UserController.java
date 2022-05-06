@@ -45,4 +45,11 @@ public class UserController {
     {
         this.userService.deleteUser(userId);
     }
+
+//    update user details
+    @PutMapping("/update")
+    public User updateUser(@RequestBody User user) throws Exception
+    {
+        return this.userService.updateUser(user);
+    }
 }

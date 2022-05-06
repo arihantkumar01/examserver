@@ -53,4 +53,24 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(Long userId) {
         this.userRepository.deleteById(userId);
     }
+
+    @Override
+    public User updateUser(User user) throws Exception {
+        User local = this.userRepository.findByUsername(user.getUsername());
+
+        if(user.getEmail() != null)
+            local.setEmail(user.getEmail());
+        if(user.getFirstName() != null)
+            local.setFirstName(user.getFirstName());
+        if(user.getLastName() != null)
+            local.setLastName(user.getLastName());
+        if(user.getMobile() != null)
+            local.setMobile(user.getMobile());
+        if(user.getPassword() != null)
+            local.setPassword(user.getPassword());
+
+        userRepository.save(local);
+
+        return userRepository.findByUsername(local.getUsername());
+    }
 }
